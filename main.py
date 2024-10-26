@@ -30,8 +30,8 @@ tv = TvDatafeed(USERNAME, PASSWORD)
 
 data_input = {
     'Yếu tố': ['TPCP Mỹ 10 năm', 'TPCP VN 10 năm', 'Chỉ số US', 'Chỉ số S&P500', 'LS liên ngân hàng VN'],
-    'symbol' : ['US10Y', 'VN10Y', 'DXY', 'SP500', 'VNINBR'],
-    'exchange' : ['TVC', 'TVC', 'TVC', 'FRED', 'ECONOMICS']
+    'symbol' : ['US10Y', 'VN10Y', 'DXY', 'SPX', 'VNINBR'],
+    'exchange' : ['TVC', 'TVC', 'TVC', 'SP', 'ECONOMICS']
 }
 
 # VNINDEX index data
@@ -69,16 +69,16 @@ for i in range(0, len(symbol)):
         status.append('Trung tính')
 
 # ------------------------------------------------------------------------------ #
-def main():
-    st.title("WARNING MARKET SCREEN")
-    data = {
-        "Yếu tố": data_input['Yếu tố'],
-        "Hệ số tương quan": correlation,
-        "Hệ số giải thích": coefficient,
-        "Hệ số Granger": granger,
-        "Trạng thái": status
-    }
-    df = pd.DataFrame(data)
-    st.dataframe(df.style)
+# def main():
+#     st.title("WARNING MARKET SCREEN")
+#     data = {
+#         "Yếu tố": data_input['Yếu tố'],
+#         "Hệ số tương quan": correlation,
+#         "Hệ số giải thích": coefficient,
+#         "Hệ số Granger": granger,
+#         "Trạng thái": status
+#     }
+#     df = pd.DataFrame(data)
+#     st.dataframe(df.style)
 
-main()
+# main()
