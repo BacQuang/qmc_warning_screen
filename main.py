@@ -94,6 +94,12 @@ fig.update_layout(xaxis1_rangeslider_visible=False,
                   xaxis4_rangeslider_visible=False,
                   xaxis5_rangeslider_visible=False,
                   xaxis6_rangeslider_visible=False,
+                  xaxis1_range=['2024-01-01','2024-12-31'],
+                  xaxis2_range=['2024-01-01','2024-12-31'],
+                  xaxis3_range=['2024-01-01','2024-12-31'],
+                  xaxis4_range=['2024-01-01','2024-12-31'],
+                  xaxis5_range=['2024-01-01','2024-12-31'],
+                  xaxis6_range=['2024-01-01','2024-12-31'],
                   bargap=0)
 
 # st.header('Biểu đồ nến chỉ số VNINDEX')
