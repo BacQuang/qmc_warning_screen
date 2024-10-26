@@ -85,7 +85,8 @@ st.header('Biểu đồ nến chỉ số VNINDEX')
 fig_vnindex = ms.make_subplots(rows=1, cols=1)
 fig_vnindex.add_trace(go.Candlestick(x=df_vnindex.index, open=df_vnindex['open'], high=df_vnindex.high, low=df_vnindex.low, close=df_vnindex.close), row=1, col=1)
 fig_vnindex.update_yaxes(fixedrange=False)
-fig_vnindex.update_layout(xaxis_rangeslider_visible=False)
+fig_vnindex.update_layout(xaxis_rangeslider_visible=False,
+                            xaxis_range=['2022-01-01','2024-12-31'])
 st.plotly_chart(fig_vnindex)
 
 for i in range(0, len(symbol)):
