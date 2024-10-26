@@ -78,26 +78,35 @@ data = {
     "Trạng thái": status
 }
 df = pd.DataFrame(data)
-
+row_pos = [1, 1, 1, 2, 2, 2]
+col_pos = [1, 2, 3, 1, 2, 3]
 st.title("WARNING MARKET SCREEN")
+fig = ms.make_subplots(rows=2, cols=3)
+for i in range(0, len(row_pos)):
+    if i == 0:
+        fig.add_trace(go.Candlestick(x=df_vnindex.index, open=df_vnindex['open'], high=df_vnindex.high, low=df_vnindex.low, close=df_vnindex.close), row=row_pos[i], col=col_pos[i])
+    else:
+        fig.add_trace(go.Candlestick(x=factor_data[symbol[i-1]].index, open=factor_data[symbol[i-1]]['open'], high=factor_data[symbol[i-1]].high, low=factor_data[symbol[i-1]].low, close=factor_data[symbol[i-1]].close), row=row_pos[i], col=col_pos[i])
+    fig.update_yaxes(fixedrange=False)
+    fig.update_layout(xaxis_rangeslider_visible=False, xaxis_range=['2022-01-01','2024-12-31'])
 
-st.header('Biểu đồ nến chỉ số VNINDEX')
-fig_vnindex = ms.make_subplots(rows=1, cols=1)
-fig_vnindex.add_trace(go.Candlestick(x=df_vnindex.index, open=df_vnindex['open'], high=df_vnindex.high, low=df_vnindex.low, close=df_vnindex.close), row=1, col=1)
-fig_vnindex.update_yaxes(fixedrange=False)
-fig_vnindex.update_layout(xaxis_rangeslider_visible=False,
-                            xaxis_range=['2022-01-01','2024-12-31'])
-st.plotly_chart(fig_vnindex)
+# st.header('Biểu đồ nến chỉ số VNINDEX')
+# fig_vnindex = ms.make_subplots(rows=1, cols=1)
+# fig_vnindex.add_trace(go.Candlestick(x=df_vnindex.index, open=df_vnindex['open'], high=df_vnindex.high, low=df_vnindex.low, close=df_vnindex.close), row=1, col=1)
+# fig_vnindex.update_yaxes(fixedrange=False)
+# fig_vnindex.update_layout(xaxis_rangeslider_visible=False,
+#                             xaxis_range=['2022-01-01','2024-12-31'])
+# st.plotly_chart(fig_vnindex)
 
-for i in range(0, len(symbol)):
-    st.header(f'Biểu đồ nến {data_input["Yếu tố"][i]}')
-    fig_i = ms.make_subplots(rows=1, cols=1)
-    fig_i.add_trace(go.Candlestick(x=factor_data[symbol[i]].index, open=factor_data[symbol[i]]['open'], high=factor_data[symbol[i]].high, low=factor_data[symbol[i]].low, close=factor_data[symbol[i]].close), row=1, col=1)
-    fig_i.update_yaxes(fixedrange=False)
-    fig_i.update_layout(xaxis_rangeslider_visible=False,
-                        xaxis_range=['2022-01-01','2024-12-31'])
-    st.plotly_chart(fig_i)
-
+# for i in range(0, len(symbol)):
+#     st.header(f'Biểu đồ nến {data_input["Yếu tố"][i]}')
+#     fig_i = ms.make_subplots(rows=1, cols=1)
+#     fig_i.add_trace(go.Candlestick(x=factor_data[symbol[i]].index, open=factor_data[symbol[i]]['open'], high=factor_data[symbol[i]].high, low=factor_data[symbol[i]].low, close=factor_data[symbol[i]].close), row=1, col=1)
+#     fig_i.update_yaxes(fixedrange=False)
+#     fig_i.update_layout(xaxis_rangeslider_visible=False,
+#                         xaxis_range=['2022-01-01','2024-12-31'])
+#     st.plotly_chart(fig_i)
+st.plotly_chart(fig)
 st.header("Bảng thông tin")
 st.dataframe(df.style)
 
