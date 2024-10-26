@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 import streamlit as st
 from tvdatafeed.tvDatafeed.main import *
 from statsmodels.tsa.stattools import grangercausalitytests
+import plotly.subplots as ms
 
 # ------------------------------------------------------------------------------ #
 # Granger Causality test
@@ -29,7 +30,7 @@ PASSWORD = 'Vuatrochoi123'
 tv = TvDatafeed(USERNAME, PASSWORD)
 
 data_input = {
-    'Yếu tố': ['TPCP Mỹ 10 năm', 'TPCP VN 10 năm', 'Chỉ số US', 'Chỉ số S&P500', 'LS liên ngân hàng VN'],
+    'Yếu tố': ['TPCP Mỹ 10 năm', 'TPCP VN 10 năm', 'Chỉ số USD', 'Chỉ số S&P500', 'LS liên ngân hàng VN'],
     'symbol' : ['US10Y', 'VN10Y', 'DXY', 'SPX', 'VNINBR'],
     'exchange' : ['TVC', 'TVC', 'TVC', 'SP', 'ECONOMICS']
 }
@@ -69,8 +70,6 @@ for i in range(0, len(symbol)):
         status.append('Trung tính')
 
 # ------------------------------------------------------------------------------ #
-# def main():
-st.title("WARNING MARKET SCREEN")
 data = {
     "Yếu tố": data_input['Yếu tố'],
     "Hệ số tương quan": correlation,
@@ -79,6 +78,26 @@ data = {
     "Trạng thái": status
 }
 df = pd.DataFrame(data)
+
+st.title("WARNING MARKET SCREEN")
+
+st.header('Biểu đồ nến chỉ số VNINDEX')
+fig_vnindex = ms.make_subplots(rows=1, cols=1)
+fig_vnindex.add_trace(go.Candlestick(x=df_vnindex.index, open=df_vnindex['open'], high=df_vnindex.high, low=df_vnindex.low, close=df_vnindex.close), row=1, col=1)
+fig_vnindex.update_yaxes(fixedrange=False)
+fig_vnindex.update_layout(xaxis_rangeslider_visible=False)
+st.plotly_chart(fig_vnindex)
+
+for i in range(0, len(symbol)):
+    st.header(f'Biểu đồ nến {data_input["Yếu tố"][i]}')
+    fig_i = ms.make_subplots(rows=1, cols=1)
+    fig_i.add_trace(go.Candlestick(x=factor_data[symbol[i]].index, open=factor_data[symbol[i]]['open'], high=factor_data[symbol[i]].high, low=factor_data[symbol[i]].low, close=factor_data[symbol[i]].close), row=1, col=1)
+    fig_i.update_yaxes(fixedrange=False)
+    fig_i.update_layout(xaxis_rangeslider_visible=False,
+                        xaxis_range=['2022-01-01','2024-12-31'])
+    st.plotly_chart(fig_i)
+
+st.header("Bảng thông tin")
 st.dataframe(df.style)
 
 # main()
