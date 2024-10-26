@@ -87,8 +87,14 @@ for i in range(0, len(row_pos)):
         fig.add_trace(go.Candlestick(x=df_vnindex.index, open=df_vnindex['open'], high=df_vnindex.high, low=df_vnindex.low, close=df_vnindex.close), row=row_pos[i], col=col_pos[i])
     else:
         fig.add_trace(go.Candlestick(x=factor_data[symbol[i-1]].index, open=factor_data[symbol[i-1]]['open'], high=factor_data[symbol[i-1]].high, low=factor_data[symbol[i-1]].low, close=factor_data[symbol[i-1]].close), row=row_pos[i], col=col_pos[i])
-    fig.update_yaxes(fixedrange=False)
-    fig.update_layout(xaxis_rangeslider_visible=False, xaxis_range=['2022-01-01','2024-12-31'])
+fig.update_yaxes(fixedrange=False)
+fig.update_layout(xaxis1_rangeslider_visible=False,
+                  xaxis2_rangeslider_visible=False,
+                  xaxis3_rangeslider_visible=False,
+                  xaxis4_rangeslider_visible=False,
+                  xaxis5_rangeslider_visible=False,
+                  xaxis6_rangeslider_visible=False,
+                  bargap=0)
 
 # st.header('Biểu đồ nến chỉ số VNINDEX')
 # fig_vnindex = ms.make_subplots(rows=1, cols=1)
