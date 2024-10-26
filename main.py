@@ -70,15 +70,15 @@ for i in range(0, len(symbol)):
 
 # ------------------------------------------------------------------------------ #
 # def main():
-#     st.title("WARNING MARKET SCREEN")
-#     data = {
-#         "Yếu tố": data_input['Yếu tố'],
-#         "Hệ số tương quan": correlation,
-#         "Hệ số giải thích": coefficient,
-#         "Hệ số Granger": granger,
-#         "Trạng thái": status
-#     }
-#     df = pd.DataFrame(data)
-#     st.dataframe(df.style)
+st.title("WARNING MARKET SCREEN")
+data = {
+    "Yếu tố": data_input['Yếu tố'],
+    "Hệ số tương quan": correlation,
+    "Hệ số giải thích": coefficient,
+    "Hệ số Granger": granger,
+    "Trạng thái": status
+}
+df = pd.DataFrame(data)
+st.dataframe(df.style)
 
 # main()
